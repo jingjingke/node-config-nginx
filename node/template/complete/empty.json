@@ -1,0 +1,11 @@
+{
+  "nginx": {
+    "root": []
+  },
+  "interface": [],
+  "hosts": [],
+  "file": {
+    "nginx": "/usr/local/etc/nginx",
+    "hosts": "/etc/hosts"
+  }
+}
