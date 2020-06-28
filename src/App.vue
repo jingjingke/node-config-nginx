@@ -17,8 +17,6 @@
 </template>
 
 <script>
-  import axios from "axios";
-
   import NginxConfig from "./pages/Nginx.vue";
   import HostsConfig from "./pages/Hosts.vue";
   import InterfaceConfig from "./pages/Interface.vue";
@@ -39,20 +37,10 @@
       };
     },
     mounted() {
-      axios
-        .post("http://localhost:3000/config/template/empty")
-        .then((response) => {
-          if (response.data instanceof Object) {
-            this.config = response.data;
-            this.isLoad = false;
-          } else {
-            console.log(response.data);
-          }
-
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      this.$net("http://localhost:3000/config/template/empty", {}, (data) => {
+        this.config = data.result;
+        this.isLoad = false;
+      })
     },
   };
 </script>

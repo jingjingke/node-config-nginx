@@ -18,8 +18,6 @@
   </div>
 </template>
 <script>
-  import axios from "axios";
-
   export default {
     name: "NginxConfig",
     props: ["config"],
@@ -30,16 +28,13 @@
     },
     methods: {
       saveConfig() {
-        axios
-          .post("http://localhost:3000/config/nginx/save", {
-            json: JSON.stringify(this.config),
-          })
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+        this.$net("http://localhost:3000/config/nginx/save", {
+          params: {
+            json: JSON.stringify(this.config)
+          }
+        }, (data) => {
+          alert(data.result);
+        })
       },
     },
   };
