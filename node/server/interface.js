@@ -20,6 +20,19 @@ module.exports.interfaceList = {
       endFn: endFn
     }
   },
+  "/config/nginx/preview": (res) => {
+    let postData = "";
+    let dataFn = (data) => {
+      postData += data;
+    }
+    let endFn = () => {
+      res.end(new ResultModel("10000", eachConfig(JSON.parse(qs.parse(postData).json).nginx, 0)).getModel());
+    }
+    return {
+      dataFn: dataFn,
+      endFn: endFn
+    }
+  },
   "/config/template/empty": (res) => {
     return {
       dataFn: () => {

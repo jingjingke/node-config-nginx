@@ -4,7 +4,7 @@
       配置文件地址：
       <input v-model="config.file.nginx" class="mr10"/>
       <div class="btn btn-solid float-right" @click="saveConfig">保存配置</div>
-      <div class="btn btn-solid float-right">预览配置</div>
+      <div class="btn btn-solid float-right" @click="previewConfig">预览配置</div>
       <div class="btn btn-solid float-right">读取配置</div>
       <div class="inline-block">
         <div class="btn btn-solid">运行</div>
@@ -34,6 +34,16 @@
           }
         }, (data) => {
           alert(data.result);
+        })
+      },
+      previewConfig() {
+        let self = this;
+        this.$net("http://localhost:3000/config/nginx/preview", {
+          params: {
+            json: JSON.stringify(this.config)
+          }
+        }, (data) => {
+          self.$preview(data.result)
         })
       },
     },

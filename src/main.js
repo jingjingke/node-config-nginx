@@ -1,8 +1,10 @@
 import Vue from "vue";
 import App from "./App.vue";
 import net from "./net.js";
+import preview from "./components/preview/index.js";
 
 Vue.prototype.$net = net;
+Vue.prototype.$preview = preview;
 
 Vue.config.productionTip = false;
 

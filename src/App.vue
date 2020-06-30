@@ -372,4 +372,34 @@
   .radio, .checkbox {
     height: 18px;
   }
+
+  .preview {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .preview-content {
+    width: 800px;
+    min-height: 250px;
+    max-height: 500px;
+    padding: 12px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -250px 0 0 -400px;
+    border-radius: 8px;
+    background: #fff;
+  }
+
+  .preview-pre {
+    width: 800px;
+    min-height: 230px;
+    max-height: 480px;
+    overflow: auto;
+    padding-bottom: 20px;
+  }
 </style>
