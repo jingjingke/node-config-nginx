@@ -15,6 +15,9 @@ class ResultModel {
       case '20001':
         this.message = '参数错误';
         break;
+      case '30001':
+        this.message = '地址错误';
+        break;
       default:
         this.message = '未知错误';
         break;
