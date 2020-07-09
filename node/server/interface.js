@@ -1,6 +1,6 @@
 const fs = require("fs");
 const qs = require("querystring");
-const {readJSON, readFile, JSONToString, StringToJSON} = require("../util.js");
+const {readJSON, readFile, writeFile, JSONToString, StringToJSON} = require("../util.js");
 const ResultModel = require("./ResultModel.js");
 
 module.exports.interfaceList = {
@@ -12,8 +12,13 @@ module.exports.interfaceList = {
     let endFn = () => {
       let query = qs.parse(postData);
       let data = JSON.parse(query.json);
-      console.log(JSONToString(data.nginx, 0));
-      res.end(new ResultModel("10000", "保存成功").getModel());
+      try {
+        writeFile(JSONToString(data.nginx, 0), query.path);
+        res.end(new ResultModel("10000", "保存成功").getModel());
+      } catch (error) {
+        res.end(new ResultModel("40001", error.message).getModel());
+      }
+
     }
     return {
       dataFn: dataFn,

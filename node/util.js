@@ -1,4 +1,5 @@
 const fs = require("fs");
+const path = require("path");
 const {exec} = require("child_process");
 
 /***
@@ -247,4 +248,40 @@ module.exports.getPieceIndex = (tag, tagArr, start, end) => {
     }
   }
   return pieceIndex;
+}
+
+/***
+ * writeFile 写入文件内容
+ * @param content 文件内容
+ * @param path 文件路径
+ * */
+module.exports.writeFile = (content, path) => {
+  exports.mkdirs(path, () => {
+    let filePath = path + "/nginx.conf";
+    // 写入
+    fs.open(filePath, 'w', (error, fd) => {
+        fs.appendFile(fd, content, "utf8", (error) => {
+          fs.close(fd, (error) => {
+            console.log(error)
+          })
+        });
+    });
+  });
+}
+
+/***
+ * mkdirs 创建目录
+ * @param dirname 文件夹路径
+ * @param callBack 创建成功后回调
+ * */
+module.exports.mkdirs = (dirname, callBack) => {
+  fs.exists(dirname, (exists) => {
+    if (exists) {
+      callBack();
+    } else {
+      exports.mkdirs(path.dirname(dirname), () => {
+        fs.mkdir(dirname, callBack);
+      })
+    }
+  })
 }

@@ -30,7 +30,8 @@
       saveConfig() {
         this.$net("http://localhost:3000/config/nginx/save", {
           params: {
-            json: JSON.stringify(this.config)
+            json: JSON.stringify(this.config),
+            path: this.config.file.nginx
           }
         }, (data) => {
           alert(data.result);
